@@ -1,50 +1,103 @@
-# Backoffice Bank
+# Banking Application
 
-This is the backoffice application for managing various aspects of the banking system. This application is built using React and connects to a backend API, which handles the core logic and data storage.
+# Demo
+A little go trhough on the user final application reviewn the postman collection and seeing a hint of the BO yet to pulish
 
-## Project Structure
+[![Check the demo](https://github.com/user-attachments/assets/549cfa36-dad1-43e7-aaf5-cc296fdca50c)](https://www.youtube.com/watch?v=iG6coQoRhbs)
 
-- **Frontend (Backoffice):** This repository contains the React-based front end for administrators and managers to interact with the banking system.
-- **Backend:** The backend handles the database interactions, authentication, and business logic. It is crucial for the operation of the backoffice.
+## Introduction
+This repository is part of a comprehensive banking application that consists of three main components: **userApp**, **backOffice**, and **backendBank**. Together, these repositories provide a full-featured banking system, enabling both users and administrators to manage accounts, perform transactions, and monitor system activity.
 
-## Connection with the Backend
+## System Architecture
 
-The backoffice communicates with the backend API to perform various actions, such as user management, account operations, transaction handling, and audit logging. The backend is essential for the backoffice to function correctly.
+### Frontend (userApp)
+- **Technology:** React.js, Material UI
+- **Purpose:** A user-facing interface for individual users to manage their accounts, view transactions, and perform banking operations.
+- **Key Features:**
+  - User dashboard with account balance and recent transactions.
+  - Interfaces for performing transfers, deposits, and withdrawals.
+  - Detailed views of each account, including transaction history and current balance.
 
-### Backend Repository
+### Frontend (backOffice)
+- **Technology:** React.js, Material UI
+- **Purpose:** An administrative interface for managing users, accounts, transactions, and audit logs.
+- **Key Features:**
+  - User management with role-based access control.
+  - Account creation and management.
+  - Viewing and filtering of audit logs.
 
-You can find the backend API repository [here](https://github.com/calfmike/backendBank).
+### Backend (backendBank)
+- **Technology:** Node.js, Express, MongoDB
+- **Purpose:** Handles API requests, user authentication, transaction processing, and data storage for both **userApp** and **backOffice**.
+- **Key Components:**
+  - JWT-based authentication.
+  - API endpoints for managing users, accounts, transactions, and audit logs.
+  - MongoDB models for Users, Accounts, Transactions, and AuditLogs.
 
-### How They Work Together
+## Key Features
 
-- **Authentication:** User authentication is managed through the backend. The backoffice sends login credentials, and the backend returns a JWT token, which is then used for making authenticated requests.
-- **User Management:** The backoffice allows administrators to create, update, delete, and view users. These operations are performed through API calls to the backend.
-- **Account Management:** Admins can view and manage user accounts through the backoffice. The data is fetched from and updated in the backend.
-- **Transactions:** The backoffice facilitates deposits, withdrawals, and transfers between accounts, all of which are processed by the backend.
-- **Audit Logs:** The backoffice provides an interface for viewing audit logs, which are stored and managed by the backend.
+### User Management
+- Registration, login, and profile management for users.
+- Role-based access control (Admins vs. Regular Users).
 
-## Features
+### Account Management
+- Account creation, viewing, and management.
+- Display of account balances and transaction history.
 
-### 1. User Management
+### Transaction Management
+- Perform deposits, withdrawals, and transfers between accounts.
+- View transaction history and revert transactions (admin feature).
 
-- **Create User:** Administrators can create new users (both regular users and admins) through a form in the backoffice.
-- **Edit User:** Existing user details can be modified, including resetting passwords.
-- **Delete User:** Administrators can delete users from the system.
-- **View User Profiles:** All users can be listed and viewed in detail.
+### Audit Logging
+- Record and view significant actions performed in the system.
+- Filter logs by date, user, or action type.
 
-### 2. Account Management
+## Use Cases
 
-- **View Accounts:** List all accounts associated with a user.
-- **Create Account:** Open new accounts (checking or savings) for users.
-- **Delete Account:** Remove accounts that are no longer needed.
+### User Actions (userApp)
+- **Dashboard Access:** Users log in and access their personalized dashboard.
+- **View Account Details:** Users can view detailed information about their accounts.
+- **Perform Transactions:** Users can initiate transfers, deposits, and withdrawals.
+- **Update Profile:** Users can update their personal information and change their password.
 
-### 3. Transaction Management
+### Admin Actions (backOffice)
+- **Manage Users:** Admins can manage user roles and permissions.
+- **Manage Accounts:** Admins can create and manage user accounts.
+- **View Audit Logs:** Admins can view detailed logs of system actions.
 
-- **Deposit Funds:** Add money to user accounts.
-- **Withdraw Funds:** Remove money from user accounts.
-- **Transfer Funds:** Move funds between user accounts.
-- **Revert Transactions:** Revert a previous transaction if necessary.
+## API Endpoints
 
-### 4. Audit Logs
+### User Management
+- **POST /auth/register:** Register a new user.
+- **POST /auth/login:** Authenticate user and generate JWT token.
+- **GET /users/profile:** Retrieve the authenticated user’s profile.
+- **PUT /users/profile:** Update user profile.
 
-- **View Audit Logs:** Access and review logs of all actions taken within the system, helping in auditing and tracking activities.
+### Account Management
+- **POST /accounts/create:** Create a new account.
+- **GET /accounts/user/:userId:** Get all accounts for a specific user.
+- **GET /accounts/:accountId:** Get details of a specific account.
+
+### Transaction Management
+- **POST /transactions/deposit:** Perform a deposit.
+- **POST /transactions/withdraw:** Perform a withdrawal.
+- **POST /transactions/transfer:** Transfer funds between accounts.
+- **GET /transactions/account/:accountId:** Get all transactions for a specific account.
+
+### Audit Logs
+- **GET /audit/logs:** Retrieve all audit logs.
+- **GET /audit/filter:** Filter audit logs by criteria.
+
+## Security Considerations
+- **Authentication:** JWT-based authentication for securing API endpoints.
+- **Authorization:** Role-based access control to restrict actions based on user roles.
+- **Input Validation:** Ensuring all user inputs are validated and sanitized.
+
+## Error Handling
+- Comprehensive error handling across all API endpoints.
+- Use of standardized error messages for client-side handling.
+
+## Conclusion
+This banking application offers a robust solution for managing user accounts, performing financial transactions, and maintaining system integrity through audit logging. The integration of **userApp**, **backOffice**, and **backendBank** ensures a seamless experience for both users and administrators.
+
+
