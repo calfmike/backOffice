@@ -1,50 +1,77 @@
-# Backoffice Bank
+# Banking Application — Full-Stack Demo
 
-This is the backoffice application for managing various aspects of the banking system. This application is built using React and connects to a backend API, which handles the core logic and data storage.
+A full-featured banking system built as a personal project to demonstrate full-stack development and core banking domain logic, end to end.
 
-## Project Structure
+🎥 **[Watch the demo](https://www.youtube.com/watch?v=iG6coQoRhbs)** — a walkthrough of the user-facing app, the Postman collection, and a preview of the back office.
 
-- **Frontend (Backoffice):** This repository contains the React-based front end for administrators and managers to interact with the banking system.
-- **Backend:** The backend handles the database interactions, authentication, and business logic. It is crucial for the operation of the backoffice.
+## Overview
 
-## Connection with the Backend
+The system is split across three repositories that work together:
 
-The backoffice communicates with the backend API to perform various actions, such as user management, account operations, transaction handling, and audit logging. The backend is essential for the backoffice to function correctly.
+| Component | Repository | Stack | Purpose |
+|-----------|-----------|-------|---------|
+| **userApp** | `userApp` | React, Material UI | User-facing app to manage accounts and perform transactions |
+| **backOffice** | `backOffice` | React, Material UI | Admin interface for users, accounts, transactions, and audit logs |
+| **backendBank** | `backendBank` | Node.js, Express, MongoDB | REST API, authentication, transaction processing, and data storage |
 
-### Backend Repository
+## Architecture
 
-You can find the backend API repository [here](https://github.com/calfmike/backendBank).
+```
+┌─────────────┐     ┌──────────────┐
+│   userApp   │     │  backOffice  │
+│  (React)    │     │   (React)    │
+└──────┬──────┘     └──────┬───────┘
+       │                   │
+       └─────────┬─────────┘
+                 │  REST API (JWT)
+          ┌──────▼───────┐
+          │  backendBank │
+          │ Node/Express │
+          └──────┬───────┘
+                 │
+          ┌──────▼───────┐
+          │   MongoDB    │
+          └──────────────┘
+```
 
-### How They Work Together
+## Key Features
 
-- **Authentication:** User authentication is managed through the backend. The backoffice sends login credentials, and the backend returns a JWT token, which is then used for making authenticated requests.
-- **User Management:** The backoffice allows administrators to create, update, delete, and view users. These operations are performed through API calls to the backend.
-- **Account Management:** Admins can view and manage user accounts through the backoffice. The data is fetched from and updated in the backend.
-- **Transactions:** The backoffice facilitates deposits, withdrawals, and transfers between accounts, all of which are processed by the backend.
-- **Audit Logs:** The backoffice provides an interface for viewing audit logs, which are stored and managed by the backend.
+### User app
+- Dashboard with account balance and recent transactions
+- Transfers, deposits, and withdrawals
+- Per-account detail views with full transaction history
 
-## Features
+### Back office (admin)
+- User management with role-based access control
+- Account creation and management
+- Audit log viewing and filtering
 
-### 1. User Management
+### Backend API
+- JWT-based authentication
+- REST endpoints for users, accounts, transactions, and audit logs
+- MongoDB models: Users, Accounts, Transactions, AuditLogs
 
-- **Create User:** Administrators can create new users (both regular users and admins) through a form in the backoffice.
-- **Edit User:** Existing user details can be modified, including resetting passwords.
-- **Delete User:** Administrators can delete users from the system.
-- **View User Profiles:** All users can be listed and viewed in detail.
+## Tech stack
 
-### 2. Account Management
+**Frontend:** React, Material UI
+**Backend:** Node.js, Express, MongoDB
+**Auth:** JWT
+**API testing:** Postman collection included
 
-- **View Accounts:** List all accounts associated with a user.
-- **Create Account:** Open new accounts (checking or savings) for users.
-- **Delete Account:** Remove accounts that are no longer needed.
+## Getting started
 
-### 3. Transaction Management
+```bash
+# Backend (backendBank)
+npm install
+npm start
 
-- **Deposit Funds:** Add money to user accounts.
-- **Withdraw Funds:** Remove money from user accounts.
-- **Transfer Funds:** Move funds between user accounts.
-- **Revert Transactions:** Revert a previous transaction if necessary.
+# Frontend (userApp / backOffice)
+npm install
+npm start
+```
 
-### 4. Audit Logs
+> Configure the API base URL and MongoDB connection string in the environment file before running.
 
-- **View Audit Logs:** Access and review logs of all actions taken within the system, helping in auditing and tracking activities.
+## About this project
+
+Built to practice full-stack development with a banking domain — accounts, transactions, role-based access, and audit trails — mirroring the kind of systems I validate professionally as a QA Analyst specialized in core banking and financial platforms.
